@@ -1,0 +1,26 @@
+{
+  "name": "dashboard-frontend",
+  "version": "1.0.0",
+  "description": "Production-ready dashboard frontend with modular architecture",
+  "type": "module",
+  "main": "frontend/app.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "vite preview --port 3000",
+    "lint": "echo 'Linting frontend code...'",
+    "format": "echo 'Formatting frontend code...'",
+    "test": "echo 'Running frontend tests...'"
+  },
+  "keywords": ["dashboard", "frontend", "call-center", "customer-service"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
