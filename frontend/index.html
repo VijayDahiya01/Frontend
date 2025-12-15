@@ -1,118 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Care Dashboard</title>
+  </head>
+  <body>
     <div id="app">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="nav-brand">
-                <h1>Dashboard</h1>
-            </div>
-            <div class="nav-status">
-                <span class="connection-status" id="connectionStatus">Connected</span>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Dashboard Overview -->
-            <section id="dashboard" class="dashboard-section">
-                <h2>Analytics Overview</h2>
-                <div class="analytics-grid">
-                    <div class="analytics-card">
-                        <h3>Total Calls</h3>
-                        <div class="stat-number" id="totalCalls">0</div>
-                    </div>
-                    <div class="analytics-card">
-                        <h3>Active Tickets</h3>
-                        <div class="stat-number" id="activeTickets">0</div>
-                    </div>
-                    <div class="analytics-card">
-                        <h3>Customer Queries</h3>
-                        <div class="stat-number" id="customerQueries">0</div>
-                    </div>
-                    <div class="analytics-card">
-                        <h3>Call Duration</h3>
-                        <div class="stat-number" id="avgDuration">0:00</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Call History -->
-            <section id="callHistory" class="call-history-section" style="display: none;">
-                <div class="section-header">
-                    <h2>Call History</h2>
-                    <button id="refreshCallHistory" class="btn-refresh">Refresh</button>
-                </div>
-                <div class="call-list" id="callList">
-                    <!-- Call history items will be populated here -->
-                </div>
-            </section>
-
-            <!-- Tickets -->
-            <section id="tickets" class="tickets-section" style="display: none;">
-                <div class="section-header">
-                    <h2>Tickets</h2>
-                    <button id="createTicket" class="btn-primary">New Ticket</button>
-                </div>
-                <div class="ticket-list" id="ticketList">
-                    <!-- Tickets will be populated here -->
-                </div>
-            </section>
-
-            <!-- Customer Lookup -->
-            <section id="customerLookup" class="customer-lookup-section" style="display: none;">
-                <div class="section-header">
-                    <h2>Customer Lookup</h2>
-                    <div class="search-box">
-                        <input type="text" id="customerSearch" placeholder="Search customers...">
-                        <button id="searchCustomer" class="btn-search">Search</button>
-                    </div>
-                </div>
-                <div class="customer-results" id="customerResults">
-                    <!-- Customer search results -->
-                </div>
-            </section>
-
-            <!-- Call Playback -->
-            <section id="callPlayback" class="call-playback-section" style="display: none;">
-                <div class="section-header">
-                    <h2>Call Playback</h2>
-                </div>
-                <div class="playback-controls">
-                    <div class="call-info" id="currentCallInfo">
-                        <p>No call selected</p>
-                    </div>
-                    <div class="audio-controls">
-                        <button id="playBtn" class="btn-play">Play</button>
-                        <button id="pauseBtn" class="btn-pause">Pause</button>
-                        <button id="stopBtn" class="btn-stop">Stop</button>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress" id="playbackProgress"></div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <ul class="nav-menu">
-                <li><a href="#" data-section="dashboard" class="nav-link active">Dashboard</a></li>
-                <li><a href="#" data-section="callHistory" class="nav-link">Call History</a></li>
-                <li><a href="#" data-section="tickets" class="nav-link">Tickets</a></li>
-                <li><a href="#" data-section="customerLookup" class="nav-link">Customer Lookup</a></li>
-                <li><a href="#" data-section="callPlayback" class="nav-link">Call Playback</a></li>
-            </ul>
-        </aside>
+      <h1>Customer Care Dashboard</h1>
+      <p>Welcome to the Customer Care Dashboard</p>
     </div>
-
-    <!-- Scripts -->
-    <script type="module" src="./app.js"></script>
-</body>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>

@@ -1,26 +1,14 @@
 {
-  "name": "dashboard-frontend",
+  "name": "customer-care-dashboard",
   "version": "1.0.0",
-  "description": "Production-ready dashboard frontend with modular architecture",
+  "description": "Customer Care Dashboard Frontend",
   "type": "module",
-  "main": "frontend/app.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "serve": "vite preview --port 3000",
-    "lint": "echo 'Linting frontend code...'",
-    "format": "echo 'Formatting frontend code...'",
-    "test": "echo 'Running frontend tests...'"
+    "preview": "vite preview"
   },
-  "keywords": ["dashboard", "frontend", "call-center", "customer-service"],
-  "author": "",
-  "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "vite": "^5.0.0"
-  },
-  "engines": {
-    "node": ">=16.0.0"
   }
 }

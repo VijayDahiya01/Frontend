@@ -1,205 +1,169 @@
-# Dashboard Frontend
+# Customer Care Dashboard
 
-Production-ready dashboard frontend with modular architecture, built for call center and customer service operations.
+A modern frontend application for managing customer care operations, built with Vite.
 
 ## Features
 
-- **Modular Architecture**: Clean separation of concerns with ES6 modules
-- **Configurable API Integration**: Environment-based URL configuration
-- **Real-time Updates**: WebSocket integration for live data
-- **Responsive Design**: Mobile-friendly interface
-- **Theme Support**: Light/dark theme switching
-- **Accessibility**: WCAG compliant design patterns
+- **Real-time Updates**: WebSocket integration for live data streaming
+- **Customer Management**: View and manage customer information
+- **Support Ticket System**: Track and resolve customer support tickets
+- **Analytics Dashboard**: Monitor key metrics and performance indicators
+- **User Authentication**: Secure login and session management
+- **Responsive Design**: Works seamlessly across desktop and mobile devices
+- **Search & Filtering**: Quickly find customers and tickets
+- **Status Tracking**: Monitor ticket status and resolution progress
+- **Notes & History**: Maintain detailed interaction logs
+- **Notifications**: Real-time alerts for important events
 
-## Architecture
+## Prerequisites
 
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (v18 or higher)
+- **npm** (v9 or higher)
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd customer-care-dashboard
 ```
-frontend/
-├── index.html          # Main HTML file
-├── styles.css          # Global styles
-├── app.js             # Application bootstrap
-└── components/        # Modular components
-    ├── config.js      # API/WebSocket URL helpers
-    ├── theme.js       # Theme management
-    ├── websocket.js   # WebSocket connection management
-    ├── dashboard.js   # Analytics dashboard
-    ├── call-history.js # Call history management
-    ├── tickets.js     # Ticket system
-    ├── customer-lookup.js # Customer search/management
-    └── call-playback.js  # Audio playback controls
-```
 
-## Setup & Development
+### 2. Install Dependencies
 
-### Prerequisites
-- Node.js >= 16.0.0
-
-### Installation
 ```bash
 npm install
 ```
 
-### Development Server
+### 3. Configure Environment Variables
+
+Copy the `.env.example` file to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Edit the `.env` file to configure your API and WebSocket URLs:
+
+```env
+VITE_API_URL=http://localhost:3000/api
+VITE_WS_URL=ws://localhost:3000/ws
+```
+
+**Note**: These URLs should point to your backend API server. The frontend and backend are separate repositories.
+
+### 4. Start the Development Server
+
 ```bash
 npm run dev
 ```
-This will start a Vite development server at `http://localhost:5173`
 
-### Build for Production
+The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
+
+## Available Scripts
+
+### `npm run dev`
+
+Starts the Vite development server with hot module replacement (HMR). The server will automatically reload when you make changes to the source files.
+
+### `npm run build`
+
+Creates an optimized production build in the `dist/` directory. The build is minified and optimized for best performance.
+
+### `npm run preview`
+
+Serves the production build locally for testing. Run `npm run build` first to generate the production files.
+
+## Project Structure
+
+```
+customer-care-dashboard/
+├── frontend/                # Frontend source files
+│   ├── components/         # Reusable components
+│   │   └── config.js       # Environment configuration
+│   ├── index.html          # Entry HTML file
+│   ├── main.js             # Main JavaScript entry point
+│   └── style.css           # Global styles
+├── dist/                   # Production build output (generated)
+├── .env                    # Environment variables (create from .env.example)
+├── .env.example            # Example environment variables
+├── .gitignore              # Git ignore rules
+├── package.json            # Project dependencies and scripts
+├── package-lock.json       # Dependency lock file
+├── vite.config.js          # Vite configuration
+└── README.md               # This file
+```
+
+## Backend Integration
+
+This frontend application is designed to work with a separate backend repository. The communication happens through:
+
+1. **REST API**: HTTP requests to `VITE_API_URL` for CRUD operations
+2. **WebSocket**: Real-time bidirectional communication via `VITE_WS_URL`
+
+Make sure your backend server is running and accessible at the URLs configured in your `.env` file before starting the frontend.
+
+### Backend Requirements
+
+The backend should provide:
+
+- RESTful API endpoints at `/api/*`
+- WebSocket server at `/ws`
+- CORS configuration allowing the frontend origin
+- Authentication endpoints if applicable
+
+## Environment Variables
+
+All environment variables used by the frontend must be prefixed with `VITE_` to be exposed to the client-side code:
+
+- `VITE_API_URL`: Base URL for the REST API
+- `VITE_WS_URL`: WebSocket server URL
+
+These are accessed in the code via `import.meta.env.VITE_*`.
+
+## Building for Production
+
+To create a production build:
+
 ```bash
 npm run build
 ```
 
-### Preview Production Build
+The optimized files will be in the `dist/` directory. You can serve these files with any static hosting service (Nginx, Apache, Netlify, Vercel, etc.).
+
+To test the production build locally:
+
 ```bash
 npm run preview
 ```
 
-## Configuration
+## Development Tips
 
-The frontend supports both Vite environment variables and runtime configuration:
+- The development server supports Hot Module Replacement (HMR) for instant updates
+- Environment variables are loaded from `.env` during development
+- For production, make sure to set environment variables in your hosting platform
+- The `dist/` directory is automatically cleaned on each build
 
-### Environment Variables
-Set these during development:
-```bash
-API_URL=http://localhost:3000/api npm run dev
-WS_URL=ws://localhost:3000/ws npm run dev
-```
+## Troubleshooting
 
-### Runtime Configuration
-For production deployment, you can inject configuration via global variables:
-```html
-<script>
-  window.__ENV = {
-    API_URL: 'https://api.yourdomain.com',
-    WS_URL: 'wss://ws.yourdomain.com'
-  };
-</script>
-```
+### Port Already in Use
 
-### Same-Origin Fallback
-If no explicit URLs are configured, the app will automatically use:
-- API: `{protocol}//{hostname}:{port}/api`
-- WebSocket: `{protocol.replace('http', 'ws')}//{hostname}:{port}/ws`
+If port 5173 is already in use, Vite will automatically try the next available port. Check the terminal output for the actual URL.
 
-## API Integration
+### Environment Variables Not Working
 
-All network requests go through the `config.js` helpers:
+- Ensure your `.env` file exists in the project root
+- Variable names must start with `VITE_`
+- Restart the dev server after changing `.env`
 
-### API Calls
-```javascript
-import { buildApiUrl } from './components/config.js';
+### Cannot Connect to Backend
 
-const response = await fetch(buildApiUrl('/dashboard/analytics'));
-const data = await response.json();
-```
+- Verify the backend server is running
+- Check that `VITE_API_URL` and `VITE_WS_URL` are correct in your `.env` file
+- Ensure the backend has proper CORS configuration
 
-### WebSocket Connection
-```javascript
-import { buildWsUrl } from './components/config.js';
+## License
 
-const ws = new WebSocket(buildWsUrl('/ws'));
-```
-
-### Recording Uploads
-Uploads are handled via fetch to the configured API base:
-```javascript
-const formData = new FormData();
-formData.append('recording', audioFile);
-
-const response = await fetch(buildApiUrl(`/calls/${callId}/recordings`), {
-  method: 'POST',
-  body: formData
-});
-```
-
-## Components
-
-### Dashboard
-- Real-time analytics cards
-- Auto-refresh every 5 minutes
-- Animated number transitions
-
-### Call History
-- Paginated call listing
-- Search and filter capabilities
-- Direct playback/download links
-
-### Tickets
-- CRUD operations for support tickets
-- Status and priority management
-- Customer association
-
-### Customer Lookup
-- Real-time customer search
-- Customer details modal
-- Call initiation integration
-
-### Call Playback
-- Audio playback controls
-- Progress tracking
-- Speed control and seeking
-
-### WebSocket
-- Automatic reconnection
-- Heartbeat monitoring
-- Message event handling
-
-## Global Functions
-
-The application exposes several global functions:
-
-```javascript
-// Navigation
-window.navigateToSection('dashboard');
-
-// Notifications
-window.showNotification('Success message', 'success');
-
-// Play call recording (as mentioned in requirements)
-window.playCallRecording(audioUrl, callId, callData);
-
-// Access to components
-window.dashboardComponent
-window.callHistoryComponent
-window.ticketsComponent
-window.customerLookupComponent
-window.callPlaybackComponent
-```
-
-## Theme Support
-
-- Automatic system theme detection
-- Manual theme toggle
-- Persistent theme preference
-- CSS custom properties integration
-
-## Browser Support
-
-- Modern browsers with ES6 module support
-- Chrome 61+
-- Firefox 60+
-- Safari 11.1+
-- Edge 16+
-
-## Development Notes
-
-- Uses ES6 modules with named imports/exports
-- Follows modern JavaScript patterns
-- Includes mock data fallbacks for development
-- Responsive CSS with mobile-first approach
-- Accessible HTML with semantic elements
-
-## Integration with Backend
-
-The frontend is designed to work with a REST API backend and WebSocket server. Expected endpoints:
-
-- `GET /api/dashboard/analytics` - Analytics data
-- `GET /api/call-history` - Call history with pagination
-- `GET /api/tickets` - Tickets with filtering
-- `GET /api/customers/search` - Customer search
-- `GET /api/calls/{id}/recording` - Audio file download
-- `POST /api/calls/{id}/recordings` - Upload recording
-- `WebSocket /ws` - Real-time updates
-
-See the component files for detailed API interaction patterns.
+[Your License Here]
